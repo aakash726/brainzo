@@ -19,7 +19,7 @@ import {
 
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { GeneratedAvatar } from "@/components/generated-avatar";
-import { ChevronDownIcon, CreditCard, CreditCardIcon, LogOutIcon } from "lucide-react";
+import { ChevronDownIcon, CreditCardIcon, LogOutIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { Button } from "@/components/ui/button";
@@ -57,7 +57,7 @@ export const DashboardUserButton = () => {
               className="size-9 mr-3"
             />
           )}
-          <div className="flex flex-col gap-0.5 text-left overflow-hidden flex-1 min-1-0">
+          <div className="flex flex-col gap-0.5 text-left overflow-hidden flex-1 min-w-0">
             <p className=" text-sm truncate w-full">{data.user.name}</p>
             <p className="text-xs truncate w-full">{data.user.email}</p>
           </div>
@@ -125,7 +125,7 @@ export const DashboardUserButton = () => {
         <DropdownMenuSeparator />
         <DropdownMenuItem>
           Billing
-          <CreditCard className="size-4" />
+          <CreditCardIcon className="size-4" />
         </DropdownMenuItem>
         <DropdownMenuItem onClick={onLogout}>
           Logout
