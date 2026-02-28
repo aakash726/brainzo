@@ -94,14 +94,14 @@ export const SignUpView = () => {
     };
 
     return (
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-4 max-w-3xl mx-auto">
             <Card className="overflow-hidden p-0">
                 <CardContent className="grid p-0 md:grid-cols-2">
                    <Form {...form}>
-                    <form  onSubmit = {form.handleSubmit(onSubmit)} className="p-6 md:p-8">
+                    <form  onSubmit = {form.handleSubmit(onSubmit)} className="p-4 md:p-6">
                         <div className="flex flex-col gap-3">
                             <div className="flex flex-col items-center text-center">
-                                <h1 className="text-2xl font-bold">
+                                <h1 className="text-xl font-semibold">
                                     Let&apos;s get started
                                 </h1>
                                 <p className="text-muted-foreground text-balance">
@@ -117,7 +117,7 @@ export const SignUpView = () => {
                                     <FormItem>
                                         <FormLabel>Name</FormLabel>
                                         <FormControl>
-                                            <Input placeholder="Aakash " {...field} />
+                                            <Input className="h-9 text-sm" placeholder="Aakash " {...field} />
                                         </FormControl>
                                         <FormMessage />
                                     </FormItem>
@@ -216,8 +216,8 @@ export const SignUpView = () => {
                     </form>
                    </Form>
                     <div className="bg-radial from-green-500 to-green-900 relative hidden md:flex flex-col gap-y-4 items-center justify-center">
-                        <img src="/logo.png" alt="Image" className="h-[92px] w-[92px]"/>
-                        <p className="text-2xl font-semibold text-white">Meet.AI</p>
+                        <img src="/logo.svg" alt="Image" className="h-[70px] w-[70px]"/>
+                        <p className="text-xl font-semibold text-white">Meet.AI</p>
                     </div>
                 </CardContent>
             </Card>
