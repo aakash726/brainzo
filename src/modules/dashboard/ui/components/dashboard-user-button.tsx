@@ -75,10 +75,10 @@ export const DashboardUserButton = () => {
             <DrawerFooter>
                 <Button 
                     variant="outline"
-                    onClick={onLogout}
+                   /* onClick={} */ 
                 >
                     <CreditCardIcon className="size-4 text-black"/>
-                    Billing
+                    Billing(Coming Soon)
                 </Button>
                 <Button
                     variant="outline"
