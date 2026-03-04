@@ -3,7 +3,7 @@ import { TRPCError } from "@trpc/server";
 import { and, count, desc, eq, getTableColumns, ilike } from "drizzle-orm";
 
 import { db } from "@/db";
-import { meetings } from "@/db/schema";
+import { meetings, agents } from "@/db/schema";
 import { createTRPCRouter, protectedProcedure } from "@/trpc/init";
 import { DEFAULT_PAGE, DEFAULT_PAGE_SIZE, MAX_PAGE_SIZE, MIN_PAGE_SIZE } from "@/constants";
 
@@ -54,8 +54,13 @@ export const meetingsRouter = createTRPCRouter({
     const [existingMeeting] = await db
       .select({
         ...getTableColumns(meetings),
+        agent: {
+          id: agents.id,
+          name: agents.name,
+        },
       })
       .from(meetings)
+      .leftJoin(agents, eq(meetings.agentId, agents.id))
       .where(
         and(
           eq(meetings.id, input.id),
@@ -67,7 +72,14 @@ export const meetingsRouter = createTRPCRouter({
       throw new TRPCError({ code: "NOT_FOUND", message: "Meeting not found" });
     }
 
-    return existingMeeting;
+    const duration = existingMeeting.startedAt && existingMeeting.endedAt
+      ? Math.floor((existingMeeting.endedAt.getTime() - existingMeeting.startedAt.getTime()) / 1000)
+      : null;
+
+    return {
+      ...existingMeeting,
+      duration,
+    };
   }),
   getMany: protectedProcedure
     .input(
@@ -87,8 +99,13 @@ export const meetingsRouter = createTRPCRouter({
       const data = await db
         .select({
           ...getTableColumns(meetings),
+          agent: {
+            id: agents.id,
+            name: agents.name,
+          },
         })
         .from(meetings)
+        .leftJoin(agents, eq(meetings.agentId, agents.id))
         .where(
           and(
             eq(meetings.userId, ctx.auth.user.id),
@@ -98,6 +115,13 @@ export const meetingsRouter = createTRPCRouter({
         .orderBy(desc(meetings.createdAt), desc(meetings.id))
         .limit(pageSize)
         .offset((page - 1) * pageSize)
+
+      const itemsWithDuration = data.map((item) => ({
+        ...item,
+        duration: item.startedAt && item.endedAt
+          ? Math.floor((item.endedAt.getTime() - item.startedAt.getTime()) / 1000)
+          : null,
+      }));
 
       const [total] = await db
         .select({ count: count() })
@@ -112,7 +136,7 @@ export const meetingsRouter = createTRPCRouter({
       const totalPages = Math.ceil(total.count / pageSize);
 
       return {
-        items: data,
+        items: itemsWithDuration,
         total: total.count,
         totalPages,
       };
