@@ -8,7 +8,7 @@ import { useMutation, useQueryClient, useSuspenseQuery } from "@tanstack/react-q
 
 import { useTRPC } from "@/trpc/client";
 import { Badge } from "@/components/ui/badge";
-import { useConfirm } from "@/modules/agents/hooks/use-confirm";
+import { useConfirm } from "@/hooks/use-confirm";
 import { ErrorState } from "@/components/error-state";
 import { LoadingState } from "@/components/loading-state";
 import { GeneratedAvatar } from "@/components/generated-avatar";
@@ -33,7 +33,9 @@ export const AgentIdView = ({ agentId }: Props) => {
     trpc.agents.remove.mutationOptions({
       onSuccess: async () => {
         await queryClient.invalidateQueries(trpc.agents.getMany.queryOptions({}));
-        // TODO: Invalidate free tier usage
+        await queryClient.invalidateQueries(
+          trpc.premium.getFreeUsage.queryOptions(),
+        );
         router.push("/agents");
       },
       onError: (error) => {
