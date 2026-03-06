@@ -1,7 +1,6 @@
 "use client"
 
 import { format } from "date-fns";
-import humanizeDuration from "humanize-duration";
 import { ColumnDef } from "@tanstack/react-table"
 import {
   CircleCheckIcon,
@@ -12,19 +11,11 @@ import {
   LoaderIcon,
 } from "lucide-react"
 
-import { cn } from "@/lib/utils";
+import { cn, formatDuration } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge"
 import { GeneratedAvatar } from "@/components/generated-avatar"
 
 import { MeetingGetMany } from "../../types"
-
-function formatDuration(seconds: number) {
-  return humanizeDuration(seconds * 1000, {
-    largest: 1,
-    round: true,
-    units: ["h", "m", "s"],
-  });
-};
 
 const statusIconMap = {
   upcoming: ClockArrowUpIcon,
@@ -53,12 +44,12 @@ export const columns: ColumnDef<MeetingGetMany[number]>[] = [
           <div className="flex items-center gap-x-1">
             <CornerDownRightIcon className="size-3 text-muted-foreground" />
             <span className="text-sm text-muted-foreground max-w-[200px] truncate capitalize">
-              {row.original.agent?.name || "No Agent"}
+              {row.original.agent.name}
             </span>
           </div>
           <GeneratedAvatar
             variant="botttsNeutral"
-            seed={row.original.agent?.name || "default"}
+            seed={row.original.agent.name}
             className="size-4"
           />
           <span className="text-sm text-muted-foreground">
@@ -94,14 +85,14 @@ export const columns: ColumnDef<MeetingGetMany[number]>[] = [
   },
   {
     accessorKey: "duration",
-    header: "Duration",
+    header: "duration",
     cell: ({ row }) => (
       <Badge
         variant="outline"
         className="capitalize [&>svg]:size-4 flex items-center gap-x-2"
       >
         <ClockFadingIcon className="text-blue-700" />
-        {row.original.duration ? formatDuration(row.original.duration) : "N/A"}
+        {row.original.duration ? formatDuration(row.original.duration) : "No duration"}
       </Badge>
     ),
   },
