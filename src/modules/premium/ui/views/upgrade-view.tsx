@@ -30,10 +30,24 @@ export const UpgradeView = () => {
           </span>{" "}
           plan
         </h5>
+        {products.length === 0 ? (
+          <div className="w-full max-w-2xl rounded-lg border bg-muted/30 p-6 text-center">
+            <p className="text-base font-medium">No billing plans found</p>
+            <p className="mt-2 text-sm text-muted-foreground">
+              Check your Polar environment and products. This page shows active
+              recurring products from the configured Polar server.
+            </p>
+          </div>
+        ) : null}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {products.map((product) => {
             const isCurrentProduct = currentSubscription?.id === product.id;
             const isPremium = !!currentSubscription;
+            const primaryPrice = product.prices[0];
+            const priceSuffix =
+              "recurringInterval" in primaryPrice
+                ? `/${primaryPrice.recurringInterval}`
+                : "";
 
             let buttonText = "Upgrade";
             let onClick = () => authClient.checkout({ products: [product.id] });
@@ -58,12 +72,12 @@ export const UpgradeView = () => {
                 }
                 title={product.name}
                 price={
-                  product.prices[0].amountType === "fixed"
-                    ? product.prices[0].priceAmount / 100
+                  primaryPrice.amountType === "fixed"
+                    ? primaryPrice.priceAmount / 100
                     : 0
                 }
                 description={product.description}
-                priceSuffix={`/${"recurringInterval" in product.prices[0] ? product.prices[0].recurringInterval : ""}`}
+                priceSuffix={priceSuffix}
                 features={product.benefits.map(
                   (benefit) => benefit.description
                 )}
