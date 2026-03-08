@@ -1,227 +1,100 @@
-# BrainZo
+# BrainZo — AI-Powered Learning Platform
 
-BrainZo is an AI-powered learning platform where users can talk with intelligent AI agents through video calls, ask questions, and receive automatic transcripts and summaries from their conversations.
+> Talk with intelligent AI agents through live video calls. Get real-time answers, automatic transcripts, and AI-generated summaries.
 
-🌐 **Live App:**  
-https://brainzo-ai.vercel.app/
-
----
-
-# Features
-
-- Talk with AI agents through real-time video calls
-- Ask questions and clear doubts interactively
-- Automatic meeting transcripts
-- AI-generated meeting summaries
-- Dashboard to manage agents and meetings
-- Real-time video communication
-- Secure authentication system
-- Subscription and upgrade system
-- Background jobs using Inngest
+🌐 **Live:** [brainzo-ai.vercel.app](https://brainzo-ai.vercel.app)
 
 ---
 
-# Tech Stack
+## Features
 
-## Frontend
-- Next.js (App Router)
-- React
-- TypeScript
-- TailwindCSS
-
-## Backend
-- tRPC
-- Drizzle ORM
-- PostgreSQL
-
-## AI & Automation
-- AI Agents
-- Inngest background workflows
-- Transcript generation
-- AI meeting summaries
-
-## Communication
-- Stream Video SDK
-- Stream Chat SDK
-
-## Payments
-- Polar
-
-## Deployment
-- Vercel
+- 📹 Real-time video calls with AI agents
+- 💬 Interactive Q&A with instant responses
+- 📝 Automatic meeting transcripts
+- 🧠 AI-generated session summaries
+- 📊 Dashboard to manage agents & meetings
+- 🔒 Secure authentication
+- 💳 Subscription system via Polar
+- ⚡ Background jobs via Inngest
 
 ---
 
-# Project Structure
+## Tech Stack
 
-```
-public
+**Frontend** — Next.js, React, TypeScript, TailwindCSS
 
-src
-│
-├── app
-│   ├── (auth)
-│   │   ├── sign-in
-│   │   ├── sign-up
-│   │   └── layout.tsx
-│   │
-│   ├── (dashboard)
-│   │   ├── agents
-│   │   │   └── [agentId]
-│   │   ├── meetings
-│   │   ├── upgrade
-│   │   ├── layout.tsx
-│   │   └── page.tsx
-│   │
-│   ├── call
-│   │   └── [meetingId]
-│   │
-│   ├── api
-│   │
-│   ├── layout.tsx
-│   ├── globals.css
-│   └── favicon.ico
-│
-├── components
-│   ├── ui
-│   ├── command-select.tsx
-│   ├── data-pagination.tsx
-│   ├── data-table.tsx
-│   ├── empty-state.tsx
-│   ├── error-state.tsx
-│   ├── generated-avatar.tsx
-│   ├── loading-state.tsx
-│   └── responsive-dialog.tsx
-│
-├── db
-│   ├── index.ts
-│   └── schema.ts
-│
-├── hooks
-│   ├── use-confirm.tsx
-│   └── use-mobile.ts
-│
-├── inngest
-│   ├── client.ts
-│   └── functions.ts
-│
-├── lib
-│   ├── auth-client.ts
-│   ├── auth.ts
-│   ├── avatar.tsx
-│   ├── polar.ts
-│   ├── stream-chat.ts
-│   ├── stream-video.ts
-│   └── utils.ts
-│
-├── modules
-│   ├── agents
-│   │   ├── hooks
-│   │   ├── server
-│   │   └── ui
-│   │
-│   ├── auth
-│   │   └── ui/views
-│   │
-│   ├── call
-│   │   └── ui
-│   │
-│   └── dashboard
-│       └── ui/components
-```
+**Backend** — tRPC, Drizzle ORM, PostgreSQL
+
+**AI & Automation** — OpenAI, Inngest
+
+**Communication** — Stream Video SDK, Stream Chat SDK
+
+**Payments** — Polar
+
+**Deployment** — Vercel
 
 ---
 
-# Installation
-
-Clone the repository
+## Getting Started
 
 ```bash
-git clone https://github.com/aakash726 /brainzo.git
-```
-
-Move into the project directory
-
-```bash
+git clone https://github.com/aakash726/brainzo.git
 cd brainzo
-```
-
-Install dependencies
-
-```bash
 npm install
-```
-
-Run development server
-
-```bash
 npm run dev
 ```
 
----
+## Environment Variables
 
-# Environment Variables
-
-Create a `.env` file and add:
-
-```
+```env
 STREAM_VIDEO_API_KEY=
 STREAM_VIDEO_SECRET_KEY=
-
 OPENAI_API_KEY=
-
 POLAR_ACCESS_TOKEN=
 NEXT_PUBLIC_POLAR_ORGANIZATION_ID=
-
 DATABASE_URL=
 ```
 
----
-
-# Running Inngest
-
-Start the Inngest development server
+## Inngest
 
 ```bash
 npx inngest-cli@latest dev
-```
-
-The Inngest dashboard will run at
-
-```
-http://localhost:8288
+# Dashboard → http://localhost:8288
 ```
 
 ---
 
-# Deployment
-
-The application is deployed on **Vercel**
-
-Production URL
+## Project Structure
 
 ```
-https://brainzo-ai.vercel.app/
+src/
+├── app/
+│   ├── (auth)/          # sign-in, sign-up
+│   ├── (dashboard)/     # agents, meetings, upgrade
+│   └── call/            # video call room
+├── components/          # shared UI components
+├── db/                  # schema & db client
+├── inngest/             # background functions
+├── lib/                 # auth, stream, polar, utils
+└── modules/             # agents, auth, call, dashboard
 ```
 
 ---
 
-# Future Improvements
+## Roadmap
 
-- Multi-agent collaboration
-- Voice AI agents
-- Meeting analytics dashboard
-- AI learning recommendations
-- Mobile app
-
----
-
-# Author
-
-Built by **Aakash Meena**
+- [ ] Multi-agent collaboration
+- [ ] Voice AI agents
+- [ ] Meeting analytics dashboard
+- [ ] AI learning recommendations
+- [ ] Mobile app
 
 ---
 
-# License
+## Author
 
-MIT License
+Built by **Aakash Meena** · [github.com/aakash726](https://github.com/aakash726)
+
+## License
+
+MIT
