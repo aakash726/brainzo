@@ -1,36 +1,100 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# BrainZo — AI-Powered Learning Platform
+
+> Talk with intelligent AI agents through live video calls. Get real-time answers, automatic transcripts, and AI-generated summaries.
+
+🌐 **Live:** [brainzo-ai.vercel.app](https://brainzo-ai.vercel.app)
+
+---
+
+## Features
+
+- 📹 Real-time video calls with AI agents
+- 💬 Interactive Q&A with instant responses
+- 📝 Automatic meeting transcripts
+- 🧠 AI-generated session summaries
+- 📊 Dashboard to manage agents & meetings
+- 🔒 Secure authentication
+- 💳 Subscription system via Polar
+- ⚡ Background jobs via Inngest
+
+---
+
+## Tech Stack
+
+**Frontend** — Next.js, React, TypeScript, TailwindCSS
+
+**Backend** — tRPC, Drizzle ORM, PostgreSQL
+
+**AI & Automation** — OpenAI, Inngest
+
+**Communication** — Stream Video SDK, Stream Chat SDK
+
+**Payments** — Polar
+
+**Deployment** — Vercel
+
+---
 
 ## Getting Started
 
-First, run the development server:
-
 ```bash
+git clone https://github.com/aakash726/brainzo.git
+cd brainzo
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Environment Variables
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```env
+STREAM_VIDEO_API_KEY=
+STREAM_VIDEO_SECRET_KEY=
+OPENAI_API_KEY=
+POLAR_ACCESS_TOKEN=
+NEXT_PUBLIC_POLAR_ORGANIZATION_ID=
+DATABASE_URL=
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Inngest
 
-## Learn More
+```bash
+npx inngest-cli@latest dev
+# Dashboard → http://localhost:8288
+```
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Project Structure
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```
+src/
+├── app/
+│   ├── (auth)/          # sign-in, sign-up
+│   ├── (dashboard)/     # agents, meetings, upgrade
+│   └── call/            # video call room
+├── components/          # shared UI components
+├── db/                  # schema & db client
+├── inngest/             # background functions
+├── lib/                 # auth, stream, polar, utils
+└── modules/             # agents, auth, call, dashboard
+```
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Roadmap
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- [ ] Multi-agent collaboration
+- [ ] Voice AI agents
+- [ ] Meeting analytics dashboard
+- [ ] AI learning recommendations
+- [ ] Mobile app
+
+---
+
+## Author
+
+Built by **Aakash Meena** · [github.com/aakash726](https://github.com/aakash726)
+
+## License
+
+MIT
